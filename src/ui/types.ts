@@ -1,0 +1,11 @@
+export type Profile = { name: string; role: string; roleName: string; permissions: string[];
+  agency: string; emergencyContact?: string; branches: { id: string; name: string; code: string; deliveryOtp: boolean }[] };
+export type Mode = 'app' | 'portal' | 'delivery';
+export type Scope = { mode: Mode; profile: Profile; branch: string; detail?: string; section: string; sub?: string };
+export type Row = Record<string, unknown> & { id: string };
+export type List = { rows: Row[]; nextCursor: string | null };
+export type Booking = { id: string; number: string; customerId: string; customerName: string; branchId: string; productName: string;
+  productId: string; quantity: number; status: string; source: string; createdAt: string; preferredDate?: string; notes?: string; holdFrom?: string;
+  agentName?: string; price: { unit: number; subtotal: number; tax: number; delivery: number; total: number };
+  deliveryOtpRequired?: boolean;
+  deliveryAddress: { line: string; city: string; state?: string; pincode: string; landmark?: string; instructions?: string } };

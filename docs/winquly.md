@@ -1,0 +1,7 @@
+# Winquly provider boundary
+
+The application owns event creation, opt-in checks, template mapping, durable notification jobs, and tenant routing. Implement the `WinqulyContract` exported by `src/server/integrations/winquly.ts` using the agency's approved documentation and register it in that module. Then configure the agency account, sender, and secrets under Settings. The Test connection action calls the contract's authenticated diagnostic method and records success after the request returns.
+
+Obtain the supported API base and endpoints, authentication scheme, approved templates and language rules, webhook verification requirements, callback event schema, message identifiers, and retry/idempotency behavior from Winquly. Pass the outbox ID as the stable correlation value. Map transient and permanent outcomes to `ProviderFailure`. Preserve delivery status precedence when translating callbacks. Verify signatures on the original request body before parsing. Validate the event and sender routing before returning the canonical event. Use the provider's timestamp or replay protection where specified.
+
+The application callback URL is `/api/v1/integrations/winquly/webhook?agency=<agency-id>`. Provider callbacks enter a durable inbox before acknowledgement. Messages that need customer support enter handoff status. Verify template categories, consent, message limits, and any conversation window requirements during adapter acceptance. Use authorized provider sandbox fixtures for the acceptance test.
